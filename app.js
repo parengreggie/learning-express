@@ -1,7 +1,17 @@
 const express = require('express');
-
+const path = require('path');
 const app = express();
 
+//set static path
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.listen(3000, function(){
+    console.log('Server started on port 3000...')
+});
+
+
+/*
+// tuts video no6
 app.get('/', function(req, res){
     res.send('Hello World');
 });
@@ -16,12 +26,7 @@ app.get('/users/:name', (req, res)=> {
     res.send('<h1>'+user+'</h1>');
 });
 
-app.listen(3000, function(){
-    console.log('Server started on port 3000...')
-});
-
-
-
+*/
 
 
 //NODE
