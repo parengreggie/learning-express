@@ -1,0 +1,12 @@
+extend layout
+
+block content
+  h1 Services
+
+  each service, i in services
+    .card
+      .card-body
+        h3 #{service.name}
+        p #{service.description}
+        p
+          | Price Range: #{service.price_range}
