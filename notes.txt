@@ -1,0 +1,143 @@
+What is Express
+
+- Web framework for Node.js
+- Provides robues set of features for web and mobile applications
+- Includes HTTP utilities and middleware for creating APIs
+
+* Routing
+	var express = require('express');
+	var app = express();
+	
+	//GET request
+	app.get('/', function(req, res){
+		res.send('hello world');
+	});
+	
+	//POST method route
+	app.post('/', function(req, res){
+		res.send('POST request to the homepage');
+	})
+	
+	//delete
+
+	
+	MIDDLEWARE
+	Functions that have access to the request and response objects
+	
+	Middleware can..
+	- Execute any code
+	- make changes to req & res
+	- End the req/res cycle
+	- Call the next middleware in the stack
+	
+	INSTALLATION
+	npm install express -save
+	
+Environment Setup
+Basic Node Server Setup
+//https://nodejs.org/en/about/
+
+
+Express Setup & Routing
+Static Web Server
+Serving JSON, Downloads & POST
+
+
+npm install nodemon
+npm install body-parser
+
+======================================================================
+What is a template engine?
+- enables you to use static template files in your app
+- variables are replaced at runtime
+- Most template engines allow variables, conditionals and loops
+- Popular engines include Pug/Jade, EJS, Handlebars and Mustache
+
+Implementing a Template Engine
+
+app.js
+	app.set('views',path.join(__dirname, 'views'));
+	app.set('view engine', 'pug');
+	
+In Route
+	res.render('index', {title: 'Express'});
+	
+----------------------------------------------------------------------
+Pug/Jade
+
+- Formerly known as Jade but was renamed to Pug
+- Pug will still occupy the "Jade" package name
+- some small changes in syntax and API
+
+----------------------------------------------------------------------
+
+npm install nodemailer 
+	
+
+
+======================================================================
+todoList
+
+What is MongoDB?
+- a NoSQL database (Non-Relational Database)
+- Document Database
+- Does not use tables and rows, but collections and documents
+- Documents are formatted like JSON objects (BSON)
+
+Advantanages
+- Schemaless (Partially)
+- Scalable (Scale Out)
+- Less Management than RDBMS
+- Runs on Cheap Hardware
+
+Common Syntax
+db.createCollection('users')
+db.users.insert({name: 'test name', email: 'test@yahoo.com'})
+db.users.find()
+db.users.update({_id:1}, {$set:{
+	name: 'test2'
+}})
+db.users.remove({_id:1})
+
+MongoDB Driver
+- Basic MongoDB driver that provides interaction with MongoDB
+- Interaction through callbacks and promises
+- Can take advantage of new ES6 features
+
+Installation
+npm install mongodb --save
+
+Connecting To MongoDB
+
+var MongoClient = require('mongodb').MongoClient
+var url = 'mongodb://localhost:27017/myproject;
+MongoClient.connect(url, function(err, db){
+	console.log("Connected successfully to server");
+})
+
+Finding Documents
+
+var findDocuments = function(db, callback){
+	var collection = db.collection('documents');
+	collection.find({}).toArray(function(err, docs){
+		console.log("Found the following records");
+		console.log(docs);
+		callback(docs);
+	});
+}
+
+-----------------------------------------
+mkdir todoapp
+npm install mongodb body-parser ejs express --save
+
+// ejs = embedded javascript
+
+
+new setup for mongodb 3.0 driver
+https://github.com/mongodb/node-mongodb-native
+https://stackoverflow.com/questions/47662220/db-collection-is-not-a-function-when-using-mongoclient-v3-0/47662979
+https://medium.freecodecamp.org/building-a-simple-crud-application-with-express-and-mongodb-63f80f3eb1cd
+
+
+wala pa na read.
+https://www.sitepoint.com/community/t/mongodb-typeerror-db-collection-is-not-a-function/285588
