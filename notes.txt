@@ -157,3 +157,39 @@ create script file .bowerrc
 bower bootstrap
 bower jquery
 
+
+========================================================================
+Sports Blog
+Topics cover
+- Mongoose ODM - Models & Schemas
+- Multiple Collections
+- Express Messages & Validator
+- More Advanced Pug Layouts
+- Express Router
+----------------------------------
+
+What is Mongoose?
+- An elegant object modeling package for Node
+- Type casting, validatioin, query building, hooks, etc
+- moreUses models that represents documents that can be saved and fetched from the database
+
+Mongoose Schema
+- MOngoose models must have a schema, which is used to define attributes for documents
+- Methods can also be defined on mongoose schemas
+
+Create The Model/Schema
+
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var userSchema = new Schema({
+	name: String,
+	email: {type: String, required: true, unique: true},
+	password: {type:String, required: true}
+});	
+	var User = mongoose.model('User', userSchema);
+	
+	module.exports = User;
+
+
+
