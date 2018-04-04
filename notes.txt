@@ -126,6 +126,8 @@ var findDocuments = function(db, callback){
 	});
 }
 
+
+mongod --dbpath "db location"
 -----------------------------------------
 mkdir todoapp
 npm install mongodb body-parser ejs express --save
@@ -141,3 +143,17 @@ https://medium.freecodecamp.org/building-a-simple-crud-application-with-express-
 
 wala pa na read.
 https://www.sitepoint.com/community/t/mongodb-typeerror-db-collection-is-not-a-function/285588
+
+
+---------------------------------------------
+install bower
+npm install -g bower
+
+create script file .bowerrc
+{
+	"directory": "public/bower_components"
+}
+
+bower bootstrap
+bower jquery
+
