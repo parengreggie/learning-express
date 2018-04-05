@@ -3,11 +3,23 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const expressValidator = require('express-validator');
+const mongoose = require('mongoose');
 
+// Mongoose Connect 
+mongoose.connect('mongodb://localhost/sportsblog');
+const db = mongoose.connection;
+
+// Port 
 const port = 3000;
 
 // init app
 const app = express();
+
+// Routes
+const index = require('./routes/index');
+const articles = require('./routes/articles');
+const categories = require('./routes/categories');
+const manage = require('./routes/manage');
 
 // View Setup
 app.set('views', path.join(__dirname, 'views'));
@@ -45,9 +57,10 @@ app.use(expressValidator({
   }
 }));
 
-app.get('/', (req, res, next) => {
-  res.send('Hello');
-});
+app.use('/', index);
+app.use('/articles', articles);
+app.use('/categories', categories);
+app.use('/manage', manage);
 
 
 app.listen(port, () => {
