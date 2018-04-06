@@ -1,0 +1,20 @@
+nav.navbar.navbar-expand-md.navbar-dark.bg-dark
+  .container
+    a.navbar-brand(href='/') SportsBlog
+    button.navbar-toggler(type='button', data-toggle='collapse',data-target='#navbar')
+      span.navbar-toggler-icon        
+    #navbar.collapse.navbar-collapse
+      ul.navbar-nav.mr-auto.collapse
+        li.nav-item
+          a.nav-link(href='/') Home
+        li.nav-item
+          a.nav-link(href='/manage/articles') Articles
+        li.nav-item
+          a.nav-link(href='/manage/categories') Categories
+      ul.navbar-nav.float-right
+        li.nav-item.dropdown            
+          a.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true' aria-expanded='false')
+            | Manage
+          .dropdown-menu.dropdown-menu-right
+            a.dropdown-item(href='/manage/articles') Articles
+            a.dropdown-item(href='/manage/categories') Categories

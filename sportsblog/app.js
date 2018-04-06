@@ -25,12 +25,22 @@ const manage = require('./routes/manage');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+// Moment
+app.locals.moment = require('moment');
+
 // Body Parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Express Session
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: true
+}));
 
 // Express Messages
 app.use(require('connect-flash')());
@@ -42,9 +52,7 @@ app.use((req, res, next) => {
 // Express Validator
 app.use(expressValidator({
   errorFormatter: (param, msg, value) => {
-    const namespace = param.split('.')
-    , root = namespace.shift()
-    , formParm = root;
+    const namespace = param.split('.'), root = namespace.shift(), formParam = root;    
   
     while(namespace.length) {
       formParam += '['+ namespace.shift() +']';
