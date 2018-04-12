@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// Category Schema
+// Article Schema
 const articleSchema = mongoose.Schema({
   title:{
     type: String
@@ -17,7 +17,7 @@ const articleSchema = mongoose.Schema({
   author: {
     type: String
   },
-  create_at: {
+  created_at: {
     type: Date,
     default: Date.now()
   },
@@ -42,27 +42,46 @@ const articleSchema = mongoose.Schema({
 
 const Article = module.exports = mongoose.model('Article', articleSchema);
 
-// Get Categories
+// Get Articles
 module.exports.getArticles = function(callback, limit){
   Article.find(callback).limit(limit).sort([['title', 'ascending']]);
 }
 
-// Add Category
+// Get Article By Category
+module.exports.getCategoryArticles = function(categoryId, callback){
+  let query = {category: categoryId};
+  Article.find(query, callback).sort([['title', 'ascending']]);
+}
+
+// Add Article
 module.exports.addArticle = function(category, callback){
   Article.create(category, callback);
 }
 
-// Get Single Category By Id
+// Get Single Article By Id
 module.exports.getArticleById = function(id, callback){
   Article.findById(id, callback);
 }
 
-// Update Category
+// Update Article
 module.exports.updateArticle = function(query, update, options, callback){
   Article.findOneAndUpdate(query, update, options, callback);
 }
 
-// Remove Category
+// Remove Article
 module.exports.removeArticle = function(query, callback){
   Article.remove(query, callback);
 }
+
+// Add comments
+module.exports.addComment = function(query, comment, callback){
+  Article.update(query, 
+    {
+      $push: {
+        comments: comment
+      }
+    },
+    callback
+  );
+}
+

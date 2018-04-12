@@ -17,11 +17,32 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/show/:id', (req, res, next) => {
-  res.render('article', {
-    title: 'Article'
-  });
+  Article.getArticleById(req.params.id, (err, article) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.render('article', {
+        title: 'Article',
+        article: article
+      });
+    }
+  });  
 });
 
+router.get('/category/:category_id',(req, res, next) => {
+  Article.getCategoryArticles(req.params.category_id, (err, articles) => {
+    if(err){
+      res.send(err);
+    } else {    
+      Category.getCategoryById(req.params.category_id, (err, category) => {
+        res.render('articles', {
+          title: category.title +'Articles',
+          articles: articles
+        });
+      });
+    }
+  });  
+});
 
 router.post('/add', (req, res, next) => {
   req.checkBody('title', 'Title is required').notEmpty();
@@ -107,5 +128,36 @@ router.delete('/delete/:id', (req, res, next) => {
   });
 });
 
+router.post('/comments/add/:id', (req, res, next) => {
+  req.checkBody('comment_subject', 'Subject is required').notEmpty();
+  req.checkBody('comment_author', 'Author is required').notEmpty();
+  req.checkBody('comment_body', 'Body is required').notEmpty();
+
+  let errors = req.validationErrors();
+
+  if(errors){
+    Article.getArticleById(req.params.id, (err, article) => {
+      res.render('article', {
+        errors: errors,
+        title: 'Article',
+        article: article
+      });
+    });
+  } else {
+    let article = new Article();
+    let query = {_id: req.params.id}
+
+    let comment = {
+      comment_subject: req.body.comment_subject,
+      comment_author: req.body.comment_author,
+      comment_body: req.body.comment_body,
+      comment_email: req.body.comment_email
+    }
+
+    Article.addComment(query, comment, (err, article) => {
+      res.redirect('/articles/show/'+req.params.id);      
+    });
+  }
+});
 
 module.exports = router;

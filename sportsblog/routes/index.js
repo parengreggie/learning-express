@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
       title: 'SportsBlog',
       articles: articles
     });
-  });
+  }, 4);
 });
 
 module.exports = router;
